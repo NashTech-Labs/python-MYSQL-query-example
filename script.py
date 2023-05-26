@@ -1,9 +1,14 @@
-import sqlite3
+import mysql.connector
 
-def execute_sqlite_query(database_file, query):
+def execute_mysql_query(host, database, user, password, query):
     try:
         # Connect to the database
-        connection = sqlite3.connect(database_file)
+        connection = mysql.connector.connect(
+            host=host,
+            database=database,
+            user=user,
+            password=password
+        )
 
         # Execute the query
         cursor = connection.cursor()
@@ -21,7 +26,10 @@ def execute_sqlite_query(database_file, query):
         print(f"An error occurred while executing the database query: {e}")
 
 # Example usage
-database_file = "database.db"
-database_query = "SELECT * FROM users"
-execute_sqlite_query(database_file, database_query)
+db_host = "localhost"
+db_database = "mydatabase"
+db_user = "myuser"
+db_password = "mypassword"
+db_query = "SELECT * FROM customers"
+execute_mysql_query(db_host, db_database, db_user, db_password, db_query)
 
